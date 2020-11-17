@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Eduardo Julião Junior",
+  "classifications": [ "Common", "WebApi", "C#8" ],
+  "identity": "RichWebApiTemplate",
+  "name": "Rich Web Api",
+  "shortName": "richwebapi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "RichWebApiTemplate",
+  "preferNameDirectory": true
+}
