@@ -13,6 +13,7 @@ using RichWebApiTemplate.Interfaces.Security;
 using RichWebApiTemplate.Middlewares;
 using Newtonsoft.Json.Serialization;
 using Serilog;
+using RichWebApiTemplate.Security;
 
 namespace RichWebApiTemplate
 {
@@ -31,6 +32,8 @@ namespace RichWebApiTemplate
             Log.Logger = new LoggerConfiguration()
                   .ReadFrom.Configuration(Configuration)
                   .CreateLogger();
+
+            services.Configure<SecuritySettings>(Configuration.GetSection(nameof(SecuritySettings)));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
