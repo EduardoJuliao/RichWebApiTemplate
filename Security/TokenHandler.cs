@@ -36,6 +36,8 @@ namespace RichWebApiTemplate.Security
 
         public bool ValidateCurrentToken(string token)
         {
+            if (token == null) return false;
+
             var mySecret = _security.Secret;
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(mySecret));
 
