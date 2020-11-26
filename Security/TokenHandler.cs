@@ -36,25 +36,24 @@ namespace RichWebApiTemplate.Security
 
         public bool ValidateCurrentToken(string token)
         {
-            if (token == null) return false;
-
             var mySecret = _security.Secret;
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(mySecret));
 
-            var myIssuer = _security.Issuer;
-            var myAudience = _security.Audiences;
+            var issuer = _security.Issuer;
+            var audiences = _security.Audiences;
 
             var tokenHandler = new JwtSecurityTokenHandler();
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidIssuer = myIssuer,
-                    ValidateAudience = myAudience != null && myAudience.Any(),
-                    ValidAudiences = myAudience,
-                    IssuerSigningKey = mySecurityKey
+                    ValidateIssuerSigningKey = _security.Validations.ValidateIssuerSigningKey,
+                    ValidateIssuer = _security.Validations.ValidateIssuer,
+                    ValidIssuer = issuer,
+                    ValidateAudience = audiences != null && audiences.Any(),
+                    ValidAudiences = audiences,
+                    IssuerSigningKey = mySecurityKey,
+                    RequireExpirationTime = _security.Validations.ExpirationDate
                 }, out SecurityToken validatedToken);
             }
             catch
